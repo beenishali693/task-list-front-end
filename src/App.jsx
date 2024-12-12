@@ -41,11 +41,11 @@ const App = () => {
       </header>
       <main>
         <div>
-          {<TaskList
+          <TaskList
           tasks = {taskData}
           onTaskToggled = {handleTaskToggled}
           onUnregisterTask={handleUnregisterTask}
-          />}
+          />
         </div>
       </main>
     </div>
