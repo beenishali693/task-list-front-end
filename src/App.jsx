@@ -40,9 +40,8 @@ const getAllTasksApi = () => {
 };
 
 
-const toggleCompletionApi = (id, taskData) => {
-  const testing = taskData.find(task => task.id === id);
-  const apiCall = testing.isComplete ? 'mark_incomplete' : 'mark_complete';
+const toggleCompletionApi = (id, isComplete) => {
+  const apiCall = isComplete ? 'mark_incomplete' : 'mark_complete';
   return axios.patch(`${taskAPIUrl}/tasks/${id}/${apiCall}`)
     .then( response => {
       const newTask = convertFromApi(response.data.task);
@@ -74,8 +73,8 @@ function App () {
     getAllTasks();
   }, []);
 
-  const handleTaskToggled = (id) => {
-    toggleCompletionApi(id, taskData)
+  const handleTaskToggled = (id, isComplete) => {
+    toggleCompletionApi(id, isComplete)
       .then(newTask => {
         setTaskData(taskData => taskData.map(task => {
           if (task.id === id) {

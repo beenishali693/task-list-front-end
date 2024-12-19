@@ -6,7 +6,7 @@ const Task = ({ id, title, isComplete, onTaskToggled, onUnregisterTask }) => {
   const buttonClass = isComplete ? 'tasks__item__toggle--completed' : '';
 
   const onTaskClicked = () => {
-    onTaskToggled(id);
+    onTaskToggled(id, isComplete);
   };
 
   const onUnregisterClicked = () => {
