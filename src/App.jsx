@@ -2,6 +2,7 @@ import TaskList from './components/TaskList.jsx';
 import './App.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import NewTaskForm from './components/NewTaskForm.jsx';
 
 // const TASKS = [
 //   {
@@ -59,6 +60,7 @@ const unregisterTaskApi = (id) => {
     });
 };
 
+
 function App () {
   const [taskData, setTaskData] = useState([]);
 
@@ -85,7 +87,7 @@ function App () {
         }));
       });
   };
-  // };
+
 
   const handleUnregisterTask = (id) => {
     unregisterTaskApi(id)
@@ -96,21 +98,32 @@ function App () {
       });
   };
 
+  const handleSubmit = (taskData) => {
+    axios.post(`${taskAPIUrl}/tasks`, taskData)
+      .then(result => {
+        setTaskData((prevTasks) => [convertFromApi(result.data.task), ...prevTasks]);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Ada&apos;s Task List</h1>
-      </header>
-      <main>
-        <div>
-          <TaskList
-            tasks = {taskData}
-            onTaskToggled = {handleTaskToggled}
-            onUnregisterTask={handleUnregisterTask}
-          />
-        </div>
-      </main>
-    </div>
+    <>
+      <div className="App">
+        <header className="App-header">
+          <h1>Ada&apos;s Task List</h1>
+        </header>
+        <main>
+          <NewTaskForm handleSubmit={handleSubmit} />
+          <div className='taskList'>
+            <TaskList
+              tasks = {taskData}
+              onTaskToggled = {handleTaskToggled}
+              onUnregisterTask={handleUnregisterTask}
+            />
+          </div>
+        </main>
+      </div>
+    </>
   );
 };
 

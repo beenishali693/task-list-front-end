@@ -24,6 +24,18 @@
   color: white;
 }
 
+main{
+  padding: 2cm;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+.taskList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2cm;
 }
