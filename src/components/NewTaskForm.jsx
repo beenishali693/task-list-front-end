@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const NewTaskForm = ({ handleSubmit }) => {
   const kDefaultFormState = {
@@ -41,6 +42,10 @@ const NewTaskForm = ({ handleSubmit }) => {
       <input type="submit"value="Add Task" />
     </form>
   );
+};
+
+NewTaskForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default NewTaskForm;
